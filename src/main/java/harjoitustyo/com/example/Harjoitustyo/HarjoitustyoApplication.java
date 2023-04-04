@@ -58,8 +58,7 @@ public CommandLineRunner demo (GameRepository gameRepository, CategoryRepository
 		platformRepository.save(platform3);
 		
 
-		Game game1 = new Game("Garry's mod","Garry's Mod is a physics-based sandbox game that, in its base game mode, has no set objectives.",2006,6.69,category1,platform1,publisher1);
-		gameRepository.save(game1);
+		
 		
 		User user1 = new User ("jesse", "$2a$10$MOmFIJrv8dUpLq2XvGRcRu5YWjzo1homIcGu78STZbbzKcHFXT1Yq", "ADMIN");
 		User user2 = new User ("vieras", "$2a$10$YsnJj5xnL0vCtALJGnzEn.CN4NExjFyJjNviT6HWyVToHRxeQxuHa", "USER");

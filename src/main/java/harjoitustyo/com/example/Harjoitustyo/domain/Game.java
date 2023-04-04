@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,9 +23,8 @@ public class Game {
 private long id;
 private String title;
 private String description;
-@DateTimeFormat(pattern = "DD-MM-YYYY")
-@Column(name ="released")
-private int released;
+@Basic
+private java.sql.Date released;
 private double price;
 
 
@@ -43,7 +43,7 @@ public Game() {
 	
 }
 
-public Game(String title, String description, int released, double price, Category category,
+public Game(String title, String description, java.sql.Date released, double price, Category category,
 		Platform platform, Publisher publisher) {
 	super();
 	this.title = title;
@@ -79,11 +79,11 @@ public void setDescription(String description) {
 	this.description = description;
 }
 
-public int getReleased() {
+public java.sql.Date getReleased() {
 	return released;
 }
 
-public void setReleased(int released) {
+public void setReleased(java.sql.Date released) {
 	this.released = released;
 }
 
