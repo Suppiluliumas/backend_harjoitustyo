@@ -45,6 +45,7 @@ public class GameController {
 		return gameRepository.findById(gameId);
 	}
 	@RequestMapping(value="/add")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addGame(Model model) {
 		model.addAttribute("game", new Game());
 		model.addAttribute("categories", categoryRepository.findAll());
@@ -58,4 +59,20 @@ public class GameController {
 		gameRepository.save(game);
 		return "redirect:gamelist";
 	}
+	@RequestMapping(value= "/delete/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String deleteGame(@PathVariable("id") long gameId, Model model) {
+		gameRepository.deleteById(gameId);
+		return "redirect:../gamelist";
+	}
+	@RequestMapping(value = "/editgame/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String editGame(@PathVariable("id") Long gameId, Model model){
+		Game game = gameRepository.getGameById(gameId);
+		model.addAttribute("categories", categoryRepository.findAll());
+		model.addAttribute("platforms", platformRepository.findAll());
+		model.addAttribute("publishers", publisherRepository.findAll());
+        model.addAttribute("game", game);
+		return "editgame";
+    }
 }

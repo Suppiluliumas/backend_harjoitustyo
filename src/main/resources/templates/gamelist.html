@@ -33,11 +33,12 @@
 			<td th:text="${game.publisher.name}">Publisher</td>
 			<td th:text="${game.platform.name}">Platform</td>
 			<td th:text="${game.category.name}">Category</td>
-			
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${game.id})}"class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editgame/{id}(id=${game.id})}"class="btn btn-secondary">Edit</a></td>
 		</tr>
 			</table>
-			<a href="/add" class="btn btn-success">Add book</a>
-	
+			<td sec:authorize="hasAuthority('ADMIN')"><a href="/add" class="btn btn-success">Add game</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a href="/categorylist"class="btn btn-success">Categorylist</a></td>
 
 	
 </body>

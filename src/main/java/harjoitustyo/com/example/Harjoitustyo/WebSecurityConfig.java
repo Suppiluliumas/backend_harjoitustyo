@@ -22,6 +22,7 @@ public class WebSecurityConfig {
         .authorizeHttpRequests()
         	.requestMatchers("/css/**").permitAll() // Enable css when logged out
         	.requestMatchers("/delete/{id}").hasAuthority("ADMIN")
+        	.requestMatchers("/editgame/{id}").hasAuthority("ADMIN")
         	.requestMatchers(toH2Console()).permitAll()
         	.anyRequest().authenticated()
         	.and()
