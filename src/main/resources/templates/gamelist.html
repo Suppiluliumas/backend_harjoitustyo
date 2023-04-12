@@ -16,6 +16,7 @@
 	</div>
 	<form th:action="@{/logout}" method="post">
 		<input type="submit" value="Sign Out" class="btn btn-sm btn-danger" />
+		
 	</form>
 	<table class="table table-striped">
 		<tr>
@@ -43,6 +44,8 @@
 				th:href="@{/editgame/{id}(id=${game.id})}" class="btn btn-secondary">Edit</a></td>
 		</tr>
 	</table>
+	<td sec:authorize="hasAuthority('ADMIN')"><a href="/signup"
+		class="btn btn-info">Add new user</a></td>
 	<td sec:authorize="hasAuthority('ADMIN')"><a href="/add"
 		class="btn btn-success">Add game</a></td>
 	<td sec:authorize="hasAuthority('ADMIN')"><a href="/categorylist"

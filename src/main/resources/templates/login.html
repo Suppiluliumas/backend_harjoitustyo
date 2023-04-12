@@ -2,8 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <head>
-<title>Spring Security Example</title>
+<title>Spring Security</title>
 </head>
 <body>
 	<div th:if="${param.error}">Invalid username and password.</div>
@@ -18,8 +21,10 @@
 			</label>
 		</div>
 		<div>
-			<input type="submit" value="Sign In" />
+			<input type="submit" value="Sign In" /> <a href="/gamelist"
+				class="btn btn-warning">Gamelist</a>
 		</div>
+
 	</form>
 </body>
 </html>
