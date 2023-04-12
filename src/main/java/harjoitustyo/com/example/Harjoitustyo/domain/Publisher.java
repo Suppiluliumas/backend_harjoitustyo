@@ -2,6 +2,7 @@ package harjoitustyo.com.example.Harjoitustyo.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -13,52 +14,51 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Publisher {
-@Id
-@GeneratedValue(strategy=GenerationType.AUTO)
-private Long publisherid;
-private String name;
-
-@OneToMany(cascade=CascadeType.ALL, mappedBy = "publisher")
-@JsonIgnoreProperties("publisher")
-private List<Game>games;
-
-public Publisher() {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long publisherid;
+	private String name;
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "publisher")
 	
-}
+	private List<Game> games;
 
-public Publisher(String name) {
-	super();
-	this.name = name;
-}
+	public Publisher() {
 
+	}
 
-public Long getPublisherid() {
-	return publisherid;
-}
+	public Publisher(String name) {
+		super();
+		this.name = name;
+	}
 
-public void setPublisherid(Long publisherid) {
-	this.publisherid = publisherid;
-}
+	public Long getPublisherid() {
+		return publisherid;
+	}
 
-public String getName() {
-	return name;
-}
+	public void setPublisherid(Long publisherid) {
+		this.publisherid = publisherid;
+	}
 
-public void setName(String name) {
-	this.name = name;
-}
+	public String getName() {
+		return name;
+	}
 
-public List<Game> getGames() {
-	return games;
-}
+	public void setName(String name) {
+		this.name = name;
+	}
 
-public void setGames(List<Game> games) {
-	this.games = games;
-}
+	public List<Game> getGames() {
+		return games;
+	}
 
-@Override
-public String toString() {
-	return "Publisher [publisherid=" + publisherid + ", name=" + name + "]";
-}
+	public void setGames(List<Game> games) {
+		this.games = games;
+	}
+
+	@Override
+	public String toString() {
+		return "Publisher [publisherid=" + publisherid + ", name=" + name + "]";
+	}
 
 }

@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"> 
-<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
 <head>
 <title>Gamelist</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -8,11 +10,13 @@
 <body>
 	<div class="container">
 		<h1>Games</h1>
-			<h3>Welcome <span sec:authentication="name"></span></h3>
-		</div>
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
-		</form>
+		<h3>
+			Welcome <span sec:authentication="name"></span>
+		</h3>
+	</div>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out" class="btn btn-sm btn-danger" />
+	</form>
 	<table class="table table-striped">
 		<tr>
 			<th>Title</th>
@@ -22,9 +26,9 @@
 			<th>Publisher</th>
 			<th>Platform</th>
 			<th>Category</th>
-			<th sec:authorize="hasAuthority('ADMIN')"> </th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
 		</tr>
-	
+
 		<tr th:each="game : ${games}">
 			<td th:text="${game.title}">Title</td>
 			<td th:text="${game.description}">Description</td>
@@ -33,13 +37,19 @@
 			<td th:text="${game.publisher.name}">Publisher</td>
 			<td th:text="${game.platform.name}">Platform</td>
 			<td th:text="${game.category.name}">Category</td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${game.id})}"class="btn btn-danger">Delete</a></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editgame/{id}(id=${game.id})}"class="btn btn-secondary">Edit</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a
+				th:href="@{/delete/{id}(id=${game.id})}" class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a
+				th:href="@{/editgame/{id}(id=${game.id})}" class="btn btn-secondary">Edit</a></td>
 		</tr>
-			</table>
-			<td sec:authorize="hasAuthority('ADMIN')"><a href="/add" class="btn btn-success">Add game</a></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a href="/categorylist"class="btn btn-success">Categorylist</a></td>
+	</table>
+	<td sec:authorize="hasAuthority('ADMIN')"><a href="/add"
+		class="btn btn-success">Add game</a></td>
+	<td sec:authorize="hasAuthority('ADMIN')"><a href="/categorylist"
+		class="btn btn-secondary">Categorylist</a></td>
+	<td sec:authorize="hasAuthority('ADMIN')"><a href="/publisherlist"
+		class="btn btn-info">Publisherlist</a></td>
 
-	
+
 </body>
 </html>

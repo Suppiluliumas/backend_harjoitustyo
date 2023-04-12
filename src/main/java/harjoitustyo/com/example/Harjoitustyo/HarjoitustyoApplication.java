@@ -1,5 +1,7 @@
 package harjoitustyo.com.example.Harjoitustyo;
 
+import java.sql.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -57,7 +59,8 @@ public CommandLineRunner demo (GameRepository gameRepository, CategoryRepository
 		platformRepository.save(platform2);
 		platformRepository.save(platform3);
 		
-
+		Game game1 = new Game("Example Game", "This is an example game", new java.sql.Date(System.currentTimeMillis()), 59.99,category1,platform1,publisher1);
+		gameRepository.save(game1);
 		
 		
 		User user1 = new User ("jesse", "$2a$10$MOmFIJrv8dUpLq2XvGRcRu5YWjzo1homIcGu78STZbbzKcHFXT1Yq", "ADMIN");

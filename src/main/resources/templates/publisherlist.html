@@ -4,26 +4,32 @@
 <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
 	th:href="@{/css/bootstrap.min.css}" />
 <head>
-<title>Categorylist</title>
+<title>Publisherlist</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Categories</h1>
+	<h1>Publishers</h1>
 	<table class="table table-striped">
 		<tr>
-			<th>Category name</th>
+			<th>Publisher</th>
 			<th sec:authorize="hasAuthority('ADMIN')"></th>
 		</tr>
 
-		<tr th:each="category : ${categories}">
-			<td th:text="${category.name}">Category name</td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a
-				th:href="@{/deletecategory/{id}(id=${category.categoryid})}"
+		<tr th:each="publisher : ${publishers}">
+			<td th:text="${publisher.name}">Publisher name</td>
+			<td><a
+				th:href="@{/deletepublisher/{id}(id=${publisher.publisherid})}"
 				class="btn btn-danger">Delete</a></td>
 		</tr>
 	</table>
-	<a href="/addcategory" class="btn btn-success">Add category</a>
-	<a href="/gamelist" class="btn btn-warning">Return</a>
+	<a href="/addpublisher" class="btn btn-success">Add publisher</a>
+	<a href="/gamelist" class="btn btn-warning">Return to gamelist</a>
+
+
+
+</body>
+</html>
+
 
 
 

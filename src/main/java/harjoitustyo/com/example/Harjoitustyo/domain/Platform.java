@@ -2,7 +2,8 @@ package harjoitustyo.com.example.Harjoitustyo.domain;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -17,9 +18,8 @@ public class Platform {
 @GeneratedValue(strategy=GenerationType.AUTO)
 private Long platformid;
 private String name;
-
+@JsonIgnore
 @OneToMany(cascade = CascadeType.ALL, mappedBy = "platform")
-@JsonIgnoreProperties("platform")
 private List<Game> games;
 
 public Platform() {

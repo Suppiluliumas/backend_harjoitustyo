@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Basic;
@@ -27,14 +28,15 @@ private String description;
 private java.sql.Date released;
 private double price;
 
-
+@JsonIgnore
 @ManyToOne
-@JsonIgnoreProperties("games")
 @JoinColumn(name = "categoryid")
 private Category category;
+@JsonIgnore
 @ManyToOne
 @JoinColumn(name ="platformid")
 private Platform platform;
+@JsonIgnore
 @ManyToOne
 @JoinColumn(name = "publisherid")
 private Publisher publisher;

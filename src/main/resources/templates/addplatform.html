@@ -3,15 +3,15 @@
 <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
 	th:href="@{/css/bootstrap.min.css}" />
 <head>
-<title>Categorylist</title>
+<title>Platforms</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Add Category</h1>
+	<h1>Add Platform</h1>
 	<div>
-		<form th:object="${category}" th:action="@{savecategory}" action="#"
+		<form th:object="${platform}" th:action="@{saveplatform}" action="#"
 			method="post">
-			<label for="name">Category</label> <input type="text" id="name"
+			<label for="name">Platform</label> <input type="text" id="name"
 				th:field="*{name}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" value="Save"></input>

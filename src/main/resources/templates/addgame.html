@@ -1,42 +1,42 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
 <head>
-    <title>Gamelist</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Gamelist</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<h1>Add game</h1>
 	<div>
 		<form th:object="${game}" th:action="@{save}" action="#" method="post">
-		  	<label for="title">Title</label>
-			<input type="text" id="title" th:field="*{title}" />
+			<label for="title">Title</label> <input type="text" id="title"
+				th:field="*{title}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="description">Description</label>
-			<input type="text" id="description" th:field="*{description}" />
+			<label for="description">Description</label> <input type="text"
+				id="description" th:field="*{description}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="released">Released</label>
-		  	<input type="date" id="released" th:field="*{released}" />
+			<label for="released">Released</label> <input type="date"
+				id="released" th:field="*{released}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<label for="price">Price</label>
-			<input type="text" id="price" th:field="*{price}" />
+			<label for="price">Price</label> <input type="text" id="price"
+				th:field="*{price}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			
-			<label for="categorylist">Category</label>
-			 <select id="categorylist" th:field="*{category}" class="form-control">
-       			<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
-    		</select>
-    		
-    		<label for="platformlist">Platform</label>
-			 <select id="platformlist" th:field="*{platform}" class="form-control">
-       			<option th:each="platform: ${platforms}" th:value="${platform.platformid}" th:text="${platform.name}"></option>
-    		</select>
-    		
-    		<label for="publisherlist">Publisher</label>
-			 <select id="publisherlist" th:field="*{publisher}" class="form-control">
-       			<option th:each="publisher: ${publishers}" th:value="${publisher.publisherid}" th:text="${publisher.name}"></option>
-    		</select>
-			
+
+			<label for="categorylist">Category</label> <select id="categorylist"
+				th:field="*{category}" class="form-control">
+				<option th:each="category: ${categories}"
+					th:value="${category.categoryid}" th:text="${category.name}"></option>
+			</select> <label for="platformlist">Platform</label> <select id="platformlist"
+				th:field="*{platform}" class="form-control">
+				<option th:each="platform: ${platforms}"
+					th:value="${platform.platformid}" th:text="${platform.name}"></option>
+			</select> <label for="publisherlist">Publisher</label> <select
+				id="publisherlist" th:field="*{publisher}" class="form-control">
+				<option th:each="publisher: ${publishers}"
+					th:value="${publisher.publisherid}" th:text="${publisher.name}"></option>
+			</select>
+
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" value="Save"></input>
 		</form>
