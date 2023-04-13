@@ -59,7 +59,7 @@ public CommandLineRunner demo (GameRepository gameRepository, CategoryRepository
 		platformRepository.save(platform2);
 		platformRepository.save(platform3);
 		
-		Game game1 = new Game("Example Game", "This is an example game", new java.sql.Date(System.currentTimeMillis()), 59.99,category1,platform1,publisher1);
+		Game game1 = new Game("Example Game", "This is an example game", new java.sql.Date(System.currentTimeMillis()), 59.99,category1,null, publisher1);
 		gameRepository.save(game1);
 		
 		

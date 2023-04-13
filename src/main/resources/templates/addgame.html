@@ -26,12 +26,15 @@
 			<label for="categorylist">Category</label> <select id="categorylist"
 				th:field="*{category}" class="form-control">
 				<option th:each="category: ${categories}"
-					th:value="${category.categoryid}" th:text="${category.name}"></option>
-			</select> <label for="platformlist">Platform</label> <select id="platformlist"
-				th:field="*{platform}" class="form-control">
-				<option th:each="platform: ${platforms}"
-					th:value="${platform.platformid}" th:text="${platform.name}"></option>
-			</select> <label for="publisherlist">Publisher</label> <select
+					th:value="${category.categoryid}" th:text="${category.name}">
+			
+			</select> Platforms: <input type="checkbox" name="platforms"
+				th:each="platform: ${platforms}" th:text="${platform.name}"
+				th:value="${platform.platformid}" th:field="*{platforms}" />
+
+				<div th:style="'margin-top: 20px;'"></div>
+
+			 <label for="publisherlist">Publisher</label> <select
 				id="publisherlist" th:field="*{publisher}" class="form-control">
 				<option th:each="publisher: ${publishers}"
 					th:value="${publisher.publisherid}" th:text="${publisher.name}"></option>
@@ -39,6 +42,7 @@
 
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" value="Save"></input>
+			<a href="/gamelist" class="btn btn-warning">Return to gamelist</a>
 		</form>
 	</div>
 </body>

@@ -20,12 +20,12 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests().requestMatchers("/css/**").permitAll() // Enable css when logged out
-				.requestMatchers("/").permitAll().requestMatchers("/gamelist").permitAll()
-				.requestMatchers("/delete/{id}").hasAuthority("ADMIN").requestMatchers("/editgame/{id}")
-				.hasAuthority("ADMIN").requestMatchers(toH2Console()).permitAll().anyRequest().authenticated().and()
-				.csrf().ignoringRequestMatchers(toH2Console()).and().headers().frameOptions().disable().and()
-				.formLogin().loginPage("/login").defaultSuccessUrl("/gamelist", true).permitAll().and().logout()
-				.permitAll().and().httpBasic();
+		.requestMatchers("/").permitAll().requestMatchers("/gamelist").permitAll()
+		.requestMatchers("/delete/{id}").hasAuthority("ADMIN").requestMatchers("/editgame/{id}")
+		.hasAuthority("ADMIN").requestMatchers(toH2Console()).permitAll().anyRequest().authenticated().and()
+		.csrf().ignoringRequestMatchers(toH2Console()).and().headers().frameOptions().disable().and()
+		.formLogin().loginPage("/login").defaultSuccessUrl("/gamelist", true).permitAll().and().logout()
+		.permitAll().and().httpBasic();
 		return http.build();
 	}
 

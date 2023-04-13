@@ -1,7 +1,9 @@
 package harjoitustyo.com.example.Harjoitustyo.domain;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,6 +17,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -33,9 +37,10 @@ private double price;
 @JoinColumn(name = "categoryid")
 private Category category;
 @JsonIgnore
-@ManyToOne
-@JoinColumn(name ="platformid")
-private Platform platform;
+@ManyToMany
+@JoinTable(name ="game_platforms",joinColumns = @JoinColumn(name="game_id"),
+inverseJoinColumns = @JoinColumn(name="platform_id"))
+private List<Platform> platforms = new ArrayList<>();
 @JsonIgnore
 @ManyToOne
 @JoinColumn(name = "publisherid")
@@ -46,14 +51,14 @@ public Game() {
 }
 
 public Game(String title, String description, java.sql.Date released, double price, Category category,
-		Platform platform, Publisher publisher) {
+		List<Platform> platforms, Publisher publisher) {
 	super();
 	this.title = title;
 	this.description = description;
 	this.released = released;
 	this.price = price;
 	this.category = category;
-	this.platform = platform;
+	this.platforms= platforms;
 	this.publisher = publisher;
 }
 
@@ -89,7 +94,6 @@ public void setReleased(java.sql.Date released) {
 	this.released = released;
 }
 
-
 public double getPrice() {
 	return price;
 }
@@ -106,12 +110,12 @@ public void setCategory(Category category) {
 	this.category = category;
 }
 
-public Platform getPlatform() {
-	return platform;
+public List<Platform> getPlatforms() {
+	return platforms;
 }
 
-public void setPlatform(Platform platform) {
-	this.platform = platform;
+public void setPlatforms(List<Platform> platforms) {
+	this.platforms = platforms;
 }
 
 public Publisher getPublisher() {
@@ -124,9 +128,9 @@ public void setPublisher(Publisher publisher) {
 
 @Override
 public String toString() {
-	if (this.category != null ||  this.platform != null ||  this.publisher != null)
+	if (this.category != null ||  this.platforms != null ||  this.publisher != null)
 		return "Game [id=" + id + ", title=" + title + ", description=" + description + ", released=" + released
-			+ ", price=" + price + ", category=" + this.getCategory() + ", platform=" + this.getPlatform()
+			+ ", price=" + price + ", category=" + this.getCategory() 
 			+ ", publisher=" + this.getPublisher() + "]";
 	else 
 		return "Game [id=" + id + ", title=" + title + ", description=" + description + ", released=" + released

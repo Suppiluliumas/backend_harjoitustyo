@@ -24,6 +24,8 @@ public class UserController {
 	public String login() {
 		return "login";
 	}
+	
+
 
 	@RequestMapping(value = "/signup")
 	public String addStudent(Model model) {
