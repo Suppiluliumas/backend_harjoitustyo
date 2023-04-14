@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +23,11 @@ import harjoitustyo.com.example.Harjoitustyo.domain.Game;
 import harjoitustyo.com.example.Harjoitustyo.domain.GameRepository;
 import harjoitustyo.com.example.Harjoitustyo.domain.PlatformRepository;
 import harjoitustyo.com.example.Harjoitustyo.domain.PublisherRepository;
+import jakarta.validation.Valid;
 
 @CrossOrigin
 @Controller
+@Validated
 public class GameController {
 	@Autowired
 	private GameRepository gameRepository;
@@ -33,28 +38,24 @@ public class GameController {
 	@Autowired
 	private PublisherRepository publisherRepository;
 
+	// Get all the games
 	@RequestMapping(value = "/gamelist", method = RequestMethod.GET)
 	public String gameList(Model model) {
 		model.addAttribute("games", gameRepository.findAll());
 		return "gamelist";
 	}
 
-	@RequestMapping(value = "/games", method = RequestMethod.GET)
-	public @ResponseBody List<Game> getGamesRest() {
-		return (List<Game>) gameRepository.findAll();
+	@RequestMapping(value = "/addgame", method = RequestMethod.POST)
+	public String addGame(@Valid Game game, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			return "addgame";
+		} else {
+			gameRepository.save(game);
+			return "redirect:/gamelist";
+		}
 	}
 
-	@RequestMapping(value = "/games/{id}", method = RequestMethod.GET)
-	public @ResponseBody Optional<Game> findGameRest(@PathVariable("id") long gameId) {
-		return gameRepository.findById(gameId);
-	}
-
-	@RequestMapping(value = "/games", method = RequestMethod.POST)
-	public @ResponseBody Game saveGameRest(@RequestBody Game game) {
-		return gameRepository.save(game);
-	}
-
-
+	// Add new game
 	@RequestMapping(value = "/add")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addGame(Model model) {
@@ -65,13 +66,19 @@ public class GameController {
 		return "addgame";
 	}
 
+	// Save game
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@PreAuthorize("hasAuthority('ADMIN')")
-	public String save(Game game) {
-		gameRepository.save(game);
-		return "redirect:gamelist";
+	public String save(@Valid Game game, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "addgame";
+		} else {
+			gameRepository.save(game);
+			return "redirect:gamelist";
+		}
 	}
 
+	// Delete game
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteGame(@PathVariable("id") long gameId, Model model) {
@@ -79,6 +86,7 @@ public class GameController {
 		return "redirect:../gamelist";
 	}
 
+	// Edit game
 	@RequestMapping(value = "/editgame/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editGame(@PathVariable("id") Long gameId, Model model) {

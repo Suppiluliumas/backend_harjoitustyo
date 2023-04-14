@@ -9,7 +9,7 @@
 <body>
 	<h1>Add Platform</h1>
 	<div>
-		<form th:object="${platform}" th:action="@{saveplatform}" action="#"
+		<form th:object="${platform}" th:action="@{/saveplatform}" action="#"
 			method="post">
 			<label for="name">Platform</label> <input type="text" id="name"
 				th:field="*{name}" />

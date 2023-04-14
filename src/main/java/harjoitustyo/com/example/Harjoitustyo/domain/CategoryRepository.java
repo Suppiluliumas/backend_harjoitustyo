@@ -8,7 +8,5 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
 
 	List<Category> findByName(String name);
 
-	void deleteById(Long id);
 
-	void save(Publisher publisher);
 }

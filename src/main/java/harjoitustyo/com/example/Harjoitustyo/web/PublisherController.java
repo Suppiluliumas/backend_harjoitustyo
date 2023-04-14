@@ -23,7 +23,6 @@ public class PublisherController {
 		model.addAttribute("publishers", pubrepository.findAll());
 		return "publisherlist";
 	}
-	
 
 	@RequestMapping(value = "/addpublisher")
 	@PreAuthorize("hasAuthority('ADMIN')")

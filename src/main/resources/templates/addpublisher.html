@@ -9,7 +9,7 @@
 <body>
 	<h1>Add Publisher</h1>
 	<div>
-		<form th:object="${publisher}" th:action="@{savepublisher}" action="#"
+		<form th:object="${publisher}" th:action="@{/savepublisher}" action="#"
 			method="post">
 			<label for="name">Publisher</label> <input type="text" id="name"
 				th:field="*{name}" />
