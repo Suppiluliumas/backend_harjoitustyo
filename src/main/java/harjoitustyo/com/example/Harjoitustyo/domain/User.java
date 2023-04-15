@@ -6,8 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "users")
@@ -16,7 +15,6 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
-	@NotEmpty
 	private Long id;
 
 	// Käyttäjänimi
@@ -28,7 +26,6 @@ public class User {
 	private String passwordHash;
 	// Rooli
 	@Column(name = "role", nullable = false)
-	@NotEmpty
 	private String role;
 
 	public User() {

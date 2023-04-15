@@ -12,7 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +29,6 @@ import jakarta.validation.Valid;
 
 @CrossOrigin
 @Controller
-@Validated
 public class GameController {
 	@Autowired
 	private GameRepository gameRepository;
@@ -45,16 +46,6 @@ public class GameController {
 		return "gamelist";
 	}
 
-	@RequestMapping(value = "/addgame", method = RequestMethod.POST)
-	public String addGame(@Valid Game game, BindingResult bindingResult, Model model) {
-		if (bindingResult.hasErrors()) {
-			return "addgame";
-		} else {
-			gameRepository.save(game);
-			return "redirect:/gamelist";
-		}
-	}
-
 	// Add new game
 	@RequestMapping(value = "/add")
 	@PreAuthorize("hasAuthority('ADMIN')")
@@ -69,13 +60,15 @@ public class GameController {
 	// Save game
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@PreAuthorize("hasAuthority('ADMIN')")
-	public String save(@Valid Game game, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			return "addgame";
-		} else {
-			gameRepository.save(game);
-			return "redirect:gamelist";
-		}
+	public String save(@Valid Game game, BindingResult bindingResult,Model model) {
+	    if (bindingResult.hasErrors()) {
+	    	model.addAttribute("categories", categoryRepository.findAll());
+			model.addAttribute("platforms", platformRepository.findAll());
+			model.addAttribute("publishers", publisherRepository.findAll());
+	    	return "addgame";
+	    }
+	    gameRepository.save(game);
+	    return "redirect:gamelist";
 	}
 
 	// Delete game

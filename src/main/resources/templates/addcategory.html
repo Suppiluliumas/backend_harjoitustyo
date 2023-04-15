@@ -12,9 +12,11 @@
 		<form th:object="${category}" th:action="@{savecategory}" action="#"
 			method="post">
 			<label for="name">Category</label> <input type="text" id="name"
-				th:field="*{name}" />
+				th:field="*{name}" /> <span th:if="${#fields.hasErrors('name')}"
+				th:errors="*{name}" class="text-danger"></span>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" value="Save"></input>
+			<a href="/categorylist">Return to categorylist</a>
 		</form>
 	</div>
 </body>

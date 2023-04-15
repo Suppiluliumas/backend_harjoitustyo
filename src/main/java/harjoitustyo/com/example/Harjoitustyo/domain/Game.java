@@ -1,8 +1,10 @@
 package harjoitustyo.com.example.Harjoitustyo.domain;
 
 import java.util.ArrayList;
-
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,12 +18,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -29,18 +28,15 @@ public class Game {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@NotBlank(message = "Title is required")
+	@NotEmpty (message = "Games title cannot be empty.")
 	private String title;
-	@NotEmpty(message = "Add description")
+	@NotEmpty(message = "Please add something to describe the game.")
 	private String description;
-	
+
 	@Basic
-	@PastOrPresent
-	@NotEmpty
-	private java.sql.Date released;
-	
-	@PositiveOrZero
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date released;
+	@PositiveOrZero(message = "No negatives please.")
 	private double price;
 
 	@JsonIgnore
@@ -60,7 +56,7 @@ public class Game {
 
 	}
 
-	public Game(String title, String description, java.sql.Date released, double price, Category category,
+	public Game(String title, String description, Date released, double price, Category category,
 			List<Platform> platforms, Publisher publisher) {
 		super();
 		this.title = title;
@@ -96,11 +92,11 @@ public class Game {
 		this.description = description;
 	}
 
-	public java.sql.Date getReleased() {
+	public Date getReleased() {
 		return released;
 	}
 
-	public void setReleased(java.sql.Date released) {
+	public void setReleased(Date released) {
 		this.released = released;
 	}
 

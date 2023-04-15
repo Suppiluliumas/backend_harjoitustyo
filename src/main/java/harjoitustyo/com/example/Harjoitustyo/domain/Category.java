@@ -11,14 +11,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
+
 
 @Entity
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long categoryid;
-	@NotNull(message = "Categoryname cannot be null")
+	@NotEmpty (message = "Cant be empty.")
 	private String name;
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")

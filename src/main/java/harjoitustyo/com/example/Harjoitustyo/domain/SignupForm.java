@@ -1,22 +1,19 @@
 package harjoitustyo.com.example.Harjoitustyo.domain;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+
+
 
 public class SignupForm {
-    @NotEmpty
-    @Size(min=5, max=30)
+
     private String username = "";
 
-    @NotEmpty
-    @Size(min=7, max=30)
+
     private String password = "";
 
-    @NotEmpty
-    @Size(min=7, max=30)
+
     private String passwordCheck = "";
 
-    @NotEmpty
+
     private String role = "USER";
 
 	public String getUsername() {

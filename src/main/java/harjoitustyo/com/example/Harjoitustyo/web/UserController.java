@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import harjoitustyo.com.example.Harjoitustyo.domain.SignupForm;
 import harjoitustyo.com.example.Harjoitustyo.domain.User;
 import harjoitustyo.com.example.Harjoitustyo.domain.UserRepository;
-import jakarta.validation.Valid;
+
 
 @Controller
 public class UserController {
@@ -33,7 +33,7 @@ public class UserController {
 		return "signup";
 	}
 	@RequestMapping(value = "/saveuser", method = RequestMethod.POST)
-    public String save(@Valid @ModelAttribute("signupform") SignupForm signupForm, BindingResult bindingResult) {
+    public String save(@ModelAttribute("signupform") SignupForm signupForm, BindingResult bindingResult) {
     	if (!bindingResult.hasErrors()) { // validation errors
     		if (signupForm.getPassword().equals(signupForm.getPasswordCheck())) { // check password match		
 	    		String pwd = signupForm.getPassword();

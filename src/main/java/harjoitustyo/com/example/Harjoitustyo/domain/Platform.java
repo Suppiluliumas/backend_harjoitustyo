@@ -14,14 +14,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 public class Platform {
 @Id
 @GeneratedValue(strategy=GenerationType.AUTO)
 private Long platformid;
-@NotEmpty
+@NotEmpty(message = "Platform name cannot be empty.")
 private String name;
 @JsonIgnore
 @ManyToMany(mappedBy = "platforms")

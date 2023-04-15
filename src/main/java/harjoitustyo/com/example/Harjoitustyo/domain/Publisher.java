@@ -13,12 +13,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 
+
 @Entity
 public class Publisher {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long publisherid;
-	@NotEmpty
+	@NotEmpty(message= "Publisher name cant be empty!")
 	private String name;
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "publisher")

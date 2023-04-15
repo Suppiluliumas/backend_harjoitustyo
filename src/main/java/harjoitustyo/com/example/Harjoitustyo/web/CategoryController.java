@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import harjoitustyo.com.example.Harjoitustyo.domain.Category;
 import harjoitustyo.com.example.Harjoitustyo.domain.CategoryRepository;
+import harjoitustyo.com.example.Harjoitustyo.domain.Game;
+import jakarta.validation.Valid;
 
 @Controller
 public class CategoryController {
@@ -36,10 +39,14 @@ public class CategoryController {
 	}
 	// Save category
 	@RequestMapping(value = "/savecategory", method = RequestMethod.POST)
-	public String save(Category category) {
-		repository.save(category);
-		return "redirect:categorylist";
+	public String save(@Valid Category category, BindingResult bindingResult) {
+	    if (bindingResult.hasErrors()) {
+	        return "addcategory";
+	    }
+	    repository.save(category);
+	    return "redirect:categorylist";
 	}
+	
 	// Delete category by id
 	@RequestMapping(value = "/deletecategory/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasAuthority('ADMIN')")

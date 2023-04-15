@@ -12,9 +12,11 @@
 		<form th:object="${platform}" th:action="@{/saveplatform}" action="#"
 			method="post">
 			<label for="name">Platform</label> <input type="text" id="name"
-				th:field="*{name}" />
+				th:field="*{name}" /><span th:if="${#fields.hasErrors('name')}"
+				th:errors="*{name}" class="text-danger"></span>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" value="Save"></input>
+			<a href="/platformlist">Return to platformlist</a>
 		</form>
 	</div>
 </body>

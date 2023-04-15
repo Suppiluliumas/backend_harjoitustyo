@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import harjoitustyo.com.example.Harjoitustyo.domain.Platform;
 import harjoitustyo.com.example.Harjoitustyo.domain.PlatformRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class PlatformController {
@@ -34,7 +36,10 @@ public class PlatformController {
 	}
 	//Save platform
 	@RequestMapping(value = "/saveplatform", method = RequestMethod.POST)
-	public String save(Platform platform) {
+	public String save(@Valid Platform platform,BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "addplatform";
+		}
 		prepository.save(platform);
 		return "redirect:platformlist";
 	}

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import harjoitustyo.com.example.Harjoitustyo.domain.Game;
 import harjoitustyo.com.example.Harjoitustyo.domain.GameRepository;
-import jakarta.validation.Valid;
+
 
 @RestController
 public class GameRestController {
@@ -32,7 +32,7 @@ public class GameRestController {
 	}
 	//REST save game
 	@RequestMapping(value = "/games", method = RequestMethod.POST)
-	public @ResponseBody Game saveGameRest(@RequestBody @Valid Game game) {
+	public @ResponseBody Game saveGameRest(@RequestBody Game game) {
 		return repository.save(game);
 	}
 }

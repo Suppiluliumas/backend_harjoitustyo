@@ -2,6 +2,7 @@ package harjoitustyo.com.example.Harjoitustyo;
 
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,8 @@ public class HarjoitustyoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HarjoitustyoApplication.class, args);
 	}
-
+		
+		
 
 		@Bean
 		public CommandLineRunner demo(GameRepository gameRepository, CategoryRepository categoryRepository,
@@ -70,12 +72,15 @@ public class HarjoitustyoApplication {
 				List<Platform> gamePlatforms = new ArrayList<>();
 				gamePlatforms.add(platform1);
 				gamePlatforms.add(platform2);
-		
+				
+				SimpleDateFormat fdate = new SimpleDateFormat("dd.MM.yyyy");
 				
 
 				Game game1 = new Game("Example Game", "This is an example game",
-						new java.sql.Date(System.currentTimeMillis()), 59.99, category1, gamePlatforms, publisher1);
+						fdate.parse("31.08.1992"), 59.99, category1, gamePlatforms, publisher1);
 				gameRepository.save(game1);
+				
+				
 
 				User user1 = new User("jesse", "$2a$10$MOmFIJrv8dUpLq2XvGRcRu5YWjzo1homIcGu78STZbbzKcHFXT1Yq", "ADMIN");
 				User user2 = new User("vieras", "$2a$10$YsnJj5xnL0vCtALJGnzEn.CN4NExjFyJjNviT6HWyVToHRxeQxuHa", "USER");
