@@ -30,10 +30,11 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests().requestMatchers("/css/**").permitAll() // Enable css when logged out
-				.requestMatchers("/").permitAll().requestMatchers("/gamelist").permitAll()
-				.requestMatchers("/delete/{id}").hasAuthority("ADMIN").requestMatchers("/editgame/{id}")
-				.hasAuthority("ADMIN").and().formLogin().loginPage("/login").defaultSuccessUrl("/gamelist", true)
-				.permitAll().and().logout().permitAll().and().httpBasic();
+		.requestMatchers("/").permitAll().requestMatchers("/gamelist").permitAll()
+		.requestMatchers("/delete/{id}").hasAuthority("ADMIN").requestMatchers("/editgame/{id}")
+		.hasAuthority("ADMIN").requestMatchers("/add").hasAuthority("ADMIN").and().headers().frameOptions().disable().and()
+		.formLogin().loginPage("/login").defaultSuccessUrl("/gamelist", true).permitAll().and().logout()
+		.permitAll().and().httpBasic();
 		return http.build();
 	}
 
@@ -41,5 +42,6 @@ public class WebSecurityConfig {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
+
 
 }

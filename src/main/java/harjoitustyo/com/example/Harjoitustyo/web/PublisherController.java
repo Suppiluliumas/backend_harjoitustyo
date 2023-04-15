@@ -5,6 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import harjoitustyo.com.example.Harjoitustyo.domain.Game;
 import harjoitustyo.com.example.Harjoitustyo.domain.Publisher;
 import harjoitustyo.com.example.Harjoitustyo.domain.PublisherRepository;
 import jakarta.validation.Valid;
-
+@CrossOrigin
 @Controller
 public class PublisherController {
 	@Autowired

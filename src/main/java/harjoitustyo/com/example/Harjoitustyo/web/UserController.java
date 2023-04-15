@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +15,7 @@ import harjoitustyo.com.example.Harjoitustyo.domain.SignupForm;
 import harjoitustyo.com.example.Harjoitustyo.domain.User;
 import harjoitustyo.com.example.Harjoitustyo.domain.UserRepository;
 
-
+@CrossOrigin
 @Controller
 public class UserController {
 	@Autowired
