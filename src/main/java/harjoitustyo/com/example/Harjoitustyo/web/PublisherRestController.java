@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import harjoitustyo.com.example.Harjoitustyo.domain.Publisher;
 import harjoitustyo.com.example.Harjoitustyo.domain.PublisherRepository;
-
+@CrossOrigin
 @RestController
 public class PublisherRestController {
-	
-	@Autowired PublisherRepository repository;
-	
+
+	@Autowired
+	PublisherRepository repository;
+
 	// REST find all publishers
 	@RequestMapping(value = "/publishers", method = RequestMethod.GET)
 	public @ResponseBody List<Publisher> getPublisherRest() {

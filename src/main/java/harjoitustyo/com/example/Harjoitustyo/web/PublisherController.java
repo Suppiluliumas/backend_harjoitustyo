@@ -15,6 +15,7 @@ import harjoitustyo.com.example.Harjoitustyo.domain.Game;
 import harjoitustyo.com.example.Harjoitustyo.domain.Publisher;
 import harjoitustyo.com.example.Harjoitustyo.domain.PublisherRepository;
 import jakarta.validation.Valid;
+
 @Controller
 public class PublisherController {
 	@Autowired
@@ -35,8 +36,8 @@ public class PublisherController {
 
 	@RequestMapping(value = "/savepublisher", method = RequestMethod.POST)
 	@PreAuthorize("hasAuthority('ADMIN')")
-	public String save(@Valid Publisher publisher,BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
+	public String save(@Valid Publisher publisher, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
 			return "addpublisher";
 		}
 		pubrepository.save(publisher);
