@@ -11,6 +11,6 @@ RUN mvn -f /home/app/pom.xml clean package
 #
 FROM eclipse-temurin:17-jre-focal
 # Harjoitustyo-0.0.1-SNAPSHOT.jar  = <artifactId>-<version>.jar (pom.xml)
-COPY --from=build /home/app/target/harjoitustyo-0.0.1-SNAPSHOT.jar /usr/local/lib/harjoitustyo.jar
+COPY --from=build /home/app/target/Harjoitustyo-0.0.1-SNAPSHOT.jar /usr/local/lib/pkg.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/usr/local/lib/harjoitustyo.jar"]
+ENTRYPOINT ["java", "-jar", "/usr/local/lib/pkg.jar"]
