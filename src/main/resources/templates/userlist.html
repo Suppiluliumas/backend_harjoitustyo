@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+<head>
+<title>Users</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Users</h1>
+	<table class="table table-striped">
+		<tr>
+			<th>User name</th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
+		</tr>
+
+		<tr th:each="user : ${users}">
+			<td th:text="${user.username}">User name</td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a
+				th:href="@{/deleteuser/{id}(id=${user.id})}"
+				class="btn btn-danger">Delete</a></td>
+		</tr>
+	</table>
+	<a href="/signup" class="btn btn-success">Add user</a>
+	<a href="/gamelist" class="btn btn-warning">Return to gamelist</a>
+
+
+
+</body>
+</html>

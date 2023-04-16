@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
@@ -19,12 +19,14 @@ public class User {
 
 	// Käyttäjänimi
 	@Column(name = "username", nullable = false, unique = true)
-	
+	@NotEmpty(message = "User name cant be empty")
 	private String username;
-	// Salanana
+	// Salasana
+	@NotEmpty(message = "Password cant be empty")
 	@Column(name = "password", nullable = false)
 	private String passwordHash;
 	// Rooli
+	@NotEmpty(message = "Role cant be empty")
 	@Column(name = "role", nullable = false)
 	private String role;
 

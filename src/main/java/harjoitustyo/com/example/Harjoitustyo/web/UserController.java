@@ -1,12 +1,14 @@
 package harjoitustyo.com.example.Harjoitustyo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,13 +28,25 @@ public class UserController {
 		return "login";
 	}
 	
-
+	@RequestMapping(value = "/userlist", method = RequestMethod.GET)
+	public String userList(Model model) {
+		model.addAttribute("users", repository.findAll());
+		return "userlist";
+	}
 
 	@RequestMapping(value = "/signup")
 	public String addStudent(Model model) {
 		model.addAttribute("signupform", new SignupForm());
 		return "signup";
 	}
+	
+	// Delete user by id
+		@RequestMapping(value = "/deleteuser/{id}", method = RequestMethod.GET)
+		@PreAuthorize("hasAuthority('ADMIN')")
+		public String deleteUser(@PathVariable("id") long userId, Model model) {
+			repository.deleteById(userId);
+			return "redirect:../userlist";
+		}
 	@RequestMapping(value = "/saveuser", method = RequestMethod.POST)
     public String save(@ModelAttribute("signupform") SignupForm signupForm, BindingResult bindingResult) {
     	if (!bindingResult.hasErrors()) { // validation errors
@@ -61,7 +75,7 @@ public class UserController {
     	else {
     		return "signup";
     	}
-    	return "redirect:/login";    	
+    	return "redirect:/userlist";    	
     }    
     
 }
