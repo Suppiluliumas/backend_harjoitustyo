@@ -14,4 +14,4 @@ This is a backend programming project that allows you to store various games in 
 
 - Java Spring Boot
 - Maven
-- Database (e.g., MySQL, PostgreSQL)
+- Database
