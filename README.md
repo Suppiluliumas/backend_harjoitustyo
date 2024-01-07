@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a backend programming project that allows you to store various games in a database. The application provides the ability to manage games with admin user rights and browse them as a visitor.
+This is a backend programming project that allows you to store various games in a database. The application provides the ability to manage games with admin user rights and browse them as a visitor. Made as backend programming courseproject.
 
 ## Features
 
